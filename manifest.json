@@ -1,0 +1,23 @@
+{
+  "manifest_version": 3,
+  "name": "Fader · 网站直连",
+  "version": "0.1.0",
+  "description": "一键记住不走代理的网站。",
+  "permissions": ["proxy", "storage", "tabs", "sidePanel"],
+  "minimum_chrome_version": "116",
+  "side_panel": { "default_path": "popup.html?panel=1" },
+  "background": { "service_worker": "background.js", "type": "module" },
+  "icons": {
+    "16": "assets/icons/fader-16.png",
+    "32": "assets/icons/fader-32.png",
+    "48": "assets/icons/fader-48.png",
+    "128": "assets/icons/fader-128.png"
+  },
+  "action": {
+    "default_title": "Fader · 网站直连",
+    "default_icon": {
+      "16": "assets/icons/fader-16.png",
+      "32": "assets/icons/fader-32.png"
+    }
+  }
+}

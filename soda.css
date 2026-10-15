@@ -1,0 +1,27 @@
+body{transition:background-color .35s,color .35s}
+#soda{position:fixed;inset:0;width:100vw;height:100vh;z-index:0;pointer-events:none;opacity:0;transition:opacity .35s}
+body[data-faded=true]{color-scheme:light;background:#f2f2f0;color:#151516}
+body[data-faded=true] #soda{opacity:1}
+body[data-faded=true] .particles{visibility:hidden}
+body[data-faded=true] .wordmark{color:#161617}
+body[data-faded=true] .dot,body[data-faded=true] .icon{color:#666}
+body[data-faded=true] .icon:hover,body[data-faded=true] .icon[aria-expanded=true]{color:#111}
+body[data-faded=true] .icon circle{fill:#f2f2f0}
+body[data-faded=true] .signal>span{background:#bcbcbc}
+body[data-faded=true] #orb i{background:#111;box-shadow:0 0 12px #0003,0 0 25px #0001}
+body[data-faded=true] #orb:hover i{box-shadow:0 0 18px #0005}
+body[data-faded=true] .primary{background:#131314;color:#f5f5f5;border-color:#111;box-shadow:0 5px 25px #0001}
+body[data-faded=true] .primary:hover{background:#29292b}
+body[data-faded=true] .dock-ring{border-color:#0003;box-shadow:0 0 36px #0000000c,inset 0 0 24px #00000008}
+body[data-faded=true] .orb-burst i{background:#111;box-shadow:0 0 6px #0004}
+body[data-faded=true] .coordinates,body[data-faded=true] h2 span,body[data-faded=true] #count{color:#777}
+body[data-faded=true] #message,body[data-faded=true] label,body[data-faded=true] .list-heading,body[data-faded=true] .text{color:#555}
+body[data-faded=true] .text:hover{color:#000}
+body[data-faded=true] .port-row,body[data-faded=true] li{border-color:#ccc}
+body[data-faded=true] input,body[data-faded=true] li span{color:#171717}
+body[data-faded=true] .small{color:#222;background:#e0e0de;border-color:#ccc}
+body[data-faded=true] .small:hover{background:#d0d0ce}
+body[data-faded=true] #empty{color:#999}
+body[data-faded=true] button:focus-visible,body[data-faded=true] input:focus-visible{outline-color:#222}
+body[data-faded=true] #settings{background:#f2f2f0ed;border-radius:4px}
+@media(prefers-reduced-motion:reduce){#soda{transition:none}}

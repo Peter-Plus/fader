@@ -1,0 +1,30 @@
+<!doctype html>
+<html lang="zh-CN">
+<head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Fader</title><link rel="stylesheet" href="popup.css"><link rel="stylesheet" href="orb.css"><link rel="stylesheet" href="soda.css"></head>
+<body>
+
+  <canvas id="soda" aria-hidden="true"></canvas>
+  <div class="particles" aria-hidden="true"></div>
+  <div class="boot" aria-hidden="true"><span>F / D</span><pre id="boot-code">0x0000 :: INIT
+ROUTE_MATRIX / 01
+░░░░░░░░░░░░░░░░</pre><div class="boot-track"></div></div>
+  <header><span class="wordmark">fader<span class="dot">.</span></span><button id="settings-toggle" class="icon" aria-label="设置" aria-expanded="false" aria-controls="settings" title="设置"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4"><path d="M4 7h16M4 17h16"/><circle cx="9" cy="7" r="3" fill="#101011"/><circle cx="15" cy="17" r="3" fill="#101011"/></svg></button></header>
+  <main>
+    <section id="home">
+      <div class="signal"><span aria-hidden="true"></span><button id="orb" type="button" role="switch" aria-checked="false" aria-label="全局直连：下拖开启，上拖或双击关闭，也可按回车切换" title="下拖开启全局直连 · 上拖或双击关闭" disabled><i></i></button><span aria-hidden="true"></span></div>
+      <h1 id="host">—</h1>
+      <div id="dock"><div class="dock-ring" aria-hidden="true"></div><button id="toggle" class="primary" disabled><span id="action-label">fade</span><span class="arrow" aria-hidden="true">↗</span></button></div>
+      <div class="coordinates" aria-hidden="true"><span>F / D</span><span>· &nbsp; · &nbsp; ·</span><span>01</span></div>
+    </section>
+    <section id="settings" hidden>
+      <h2>设置<span>CONFIG / 01</span></h2>
+      <label for="display-mode">显示模式</label>
+      <select id="display-mode"><option value="panel">侧栏</option><option value="popup">弹窗</option></select>
+      <form id="port-form"><label for="port">代理端口</label><div class="port-row"><span>127.0.0.1 :</span><input id="port" aria-label="代理端口" type="number" min="1" max="65535" value="7890" required><button type="submit" class="small">保存</button></div></form>
+      <div class="list-heading"><span>直连规则</span><span id="count">0</span></div><ul id="sites"></ul><p id="empty">—</p><button id="reset" class="text">全部恢复 <span>↗</span></button>
+    </section>
+    <p id="message" role="status" aria-live="polite"></p>
+  </main><script type="module" src="popup.js"></script>
+</body></html>
+
+
