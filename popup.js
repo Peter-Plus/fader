@@ -13,12 +13,9 @@ async function refreshTab() {
 }
 const soda = createSoda(document.getElementById("soda"));
 const orb = createOrb(enabled => run(async () => {
-  await send({ type: "setGlobalDirect", enabled });
-  await transition();
-  if (host && !tab?.incognito) {
-    try { await chrome.tabs.reload(tab.id); }
-    catch { $("message").textContent = "设置已保存，请手动刷新。"; }
-  }
+  const result = await send({ type: "setGlobalDirect", enabled, tabId: tab?.id });
+  if (!result.overlayPlayed) await transition();
+  if (result.reloadFailed) $("message").textContent = "设置已保存，请手动刷新。";
 }), () => soda.pulse());
 async function send(message) {
   let timer;
@@ -89,7 +86,7 @@ async function run(action) {
 $("toggle").addEventListener("click", () => run(async () => {
   $("action-label").textContent = "…";
   const result = await send({ type: "toggle", tabId: tab.id, host });
-  await transition();
+  if (!result.overlayPlayed) await transition();
   if (result.reloadFailed) $("message").textContent = "规则已保存，请手动刷新。";
 }));
 $("settings-toggle").addEventListener("click", () => {

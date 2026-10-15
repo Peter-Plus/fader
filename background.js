@@ -1,5 +1,6 @@
 import { website, localProxy, withSites } from "./core.js";
 import { restoreDisplayMode, setDisplayMode } from "./display-mode.js";
+import { effectAndReload } from "./page-effect.js";
 
 // Register listeners immediately; restore the toolbar mode on every worker start.
 const displayReady = chrome.sidePanel ? restoreDisplayMode().catch(error => console.error("Fader display mode", error)) : Promise.resolve();
@@ -46,6 +47,10 @@ async function handle(message) {
   if (message.type === "setGlobalDirect") {
     if (typeof message.enabled !== "boolean") throw new Error("无效的开关状态。");
     await save({ ...state, globalDirect: message.enabled });
+    if (Number.isInteger(message.tabId)) {
+      const tab = await chrome.tabs.get(message.tabId).catch(() => null);
+      if (tab && website(tab.url) && !tab.incognito) return effectAndReload(tab, message.enabled || state.sites.includes(website(tab.url)));
+    }
     return {};
   }
   if (message.type === "setPort") {
@@ -77,9 +82,7 @@ async function handle(message) {
     else base = localProxy(7890);
   }
   await save(sites.length ? { ...state, sites, base } : cleared());
-  let reloadFailed = false;
-  try { await chrome.tabs.reload(tab.id); } catch { reloadFailed = true; }
-  return { reloadFailed };
+  return effectAndReload(tab, !removing);
 }
 
 let queue = Promise.resolve();
