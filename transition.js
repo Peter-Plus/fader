@@ -18,7 +18,7 @@ export function playTransition(direct) {
     const paper = direct ? "#f0f0ed" : "#09090b";
     const glyphs = "01ABCDEF/:[]<>#░▒λ∅χ";
     const randomText = n => Array.from({ length: n }, () => glyphs[Math.floor(Math.random() * glyphs.length)]).join("");
-    let rows = [], beat = -1, frame, finished = false;
+    let rows = Array.from({ length: 24 }, () => randomText(44)), beat = -1, frame, finished = false;
     const start = performance.now();
     const end = () => {
       if (finished) return;
@@ -28,8 +28,8 @@ export function playTransition(direct) {
     };
     const timer = setTimeout(end, 2000);
     window.addEventListener("pagehide", end, { once: true });
-    function draw(now) {
-      const t = (now - start) / 1000;
+    function draw() {
+      const t = Math.max(0, (performance.now() - start) / 1000);
       if (t >= 2) { end(); return; }
       const phase = Math.floor(t * 13);
       if (phase !== beat) { beat = phase; rows = Array.from({ length: 24 }, () => randomText(44)); }
